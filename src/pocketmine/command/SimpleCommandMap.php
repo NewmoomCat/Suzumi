@@ -177,6 +177,8 @@ class SimpleCommandMap implements CommandMap {
 		$this->register("pocketmine", new ReloadCommand("reload"), null, true);
 		$this->register("pocketmine", new XpCommand("xp"));
 		$this->register("pocketmine", new SetBlockCommand("setblock"));
+
+		// 彩蛋命令
 		$this->register("pocketmine", new DameCommand("dame"), null, true);
 
 		if($this->server->getProperty("debug.commands", false)){

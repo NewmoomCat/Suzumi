@@ -165,7 +165,7 @@ namespace pocketmine {
 	/**
 	 * @return bool|string
 	 */
-	function detect_system_timezone(){
+	function detect_system_timezone(): string{
 		switch(Utils::getOS()){
 			case 'win':
 				$keyPath = 'HKLM\\SYSTEM\\CurrentControlSet\\Control\\TimeZoneInformation';
@@ -233,6 +233,14 @@ namespace pocketmine {
 				// Ubuntu / Debian.
 				if(file_exists('/etc/timezone')){
 					$data = file_get_contents('/etc/timezone');
+					if($data){
+						return trim($data);
+					}
+				}
+
+				// OpenSUSE Test
+				if (file_exists('/etc/localtime')) {
+					$data = file_get_contents('/etc/localtime');
 					if($data){
 						return trim($data);
 					}

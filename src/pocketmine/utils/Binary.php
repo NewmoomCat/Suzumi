@@ -442,7 +442,7 @@ class Binary {
 	 *
 	 * @return int
 	 */
-	public static function readVarInt($stream){
+	public static function readVarInt($stream): int{
 		$shift = PHP_INT_SIZE === 8 ? 63 : 31;
 		$raw = self::readUnsignedVarInt($stream);
 		$temp = ((($raw << $shift) >> $shift) ^ $raw) >> 1;
@@ -455,7 +455,7 @@ class Binary {
 	 *
 	 * @return int
 	 */
-	public static function readUnsignedVarInt($stream){
+	public static function readUnsignedVarInt($stream): int{
 		$value = 0;
 		$i = 0;
 		do{
@@ -474,7 +474,7 @@ class Binary {
 	 *
 	 * @return string
 	 */
-	public static function writeVarInt($v){
+	public static function writeVarInt($v): string{
 		return self::writeUnsignedVarInt(($v << 1) ^ ($v >> (PHP_INT_SIZE === 8 ? 63 : 31)));
 	}
 
@@ -483,7 +483,7 @@ class Binary {
 	 *
 	 * @return string
 	 */
-	public static function writeUnsignedVarInt($value){
+	public static function writeUnsignedVarInt($value): string{
 		$buf = "";
 		for($i = 0; $i < 10; ++$i){
 			if(($value >> 7) !== 0){
@@ -503,7 +503,7 @@ class Binary {
 	 *
 	 * @return string
 	 */
-	public static function signInt($value) {
+	public static function signInt($value) : string{
 		return $value << 32 >> 32;
 	}
 }
