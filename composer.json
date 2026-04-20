@@ -4,13 +4,16 @@
 	"type": "project",
 	"license": "LGPL-3.0",
     "require": {
-        "php": ">=7.2",
+        "php": ">=8.0",
 		"ext-leveldb": "*",
 		"ext-openssl": "*",
 		"ext-pthreads": "*"
 	},
 	"autoload": {
-		"psr-4": {
+		"exclude-from-classmap": [
+			"src/stubs"
+		],
+		"psr-0": {
 			"": ["src"]
 		}
 	},

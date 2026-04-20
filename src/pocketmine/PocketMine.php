@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=0);
 
 /*
  *
@@ -27,15 +27,10 @@
  *     |  |    |  |
  *     |——|    |——|
 */
-namespace {
-	echo "[简中] 请使用PM4的PHP8来获取更稳定的性能" . PHP_EOL;
-	echo "[한국어] PM4에 PHP 8을 사용하여 더욱 안정적인 성능을 확보하십시오." . PHP_EOL;
-	echo "[English] Please use PHP 8 for PM4 to achieve more stable performance." . PHP_EOL;
-}
-
 
 namespace pocketmine {
 
+	use http\Params;
 	use pocketmine\utils\Binary;
 	use pocketmine\utils\MainLogger;
 	use pocketmine\utils\ServerKiller;
@@ -81,8 +76,8 @@ namespace pocketmine {
 		exit(1);
 	}
 
-	if(version_compare("8.1", PHP_VERSION) < 0){
-		echo "[CRITICAL] You must use PHP =< 8.1" . PHP_EOL;
+	if(version_compare("8.2", PHP_VERSION) < 0){
+		echo "[CRITICAL] You must use PHP =< 8.2" . PHP_EOL;
 		echo "[CRITICAL] Please use the installer provided on the homepage." . PHP_EOL;
 		exit(1);
 	}
@@ -168,9 +163,6 @@ namespace pocketmine {
 		}
 	}
 
-	/**
-	 * @return bool|string
-	 */
 	function detect_system_timezone(): string{
 		switch(Utils::getOS()){
 			case 'win':
@@ -276,12 +268,7 @@ namespace pocketmine {
 		}
 	}
 
-	/**
-	 * @param string $offset In the format of +09:00, +02:00, -04:00 etc.
-	 *
-	 * @return string
-	 */
-	function parse_offset($offset){
+	function parse_offset(string $offset): string{
 		//Make signed offsets unsigned for date_parse
 		if(strpos($offset, '-') !== false){
 			$negative_offset = true;
@@ -326,9 +313,6 @@ namespace pocketmine {
 		}
 	}
 
-	/**
-	 * @param $pid
-	 */
 	function kill($pid){
 		switch(Utils::getOS()){
 			case "win":
@@ -345,13 +329,7 @@ namespace pocketmine {
 		}
 	}
 
-	/**
-	 * @param object $value
-	 * @param bool   $includeCurrent
-	 *
-	 * @return int
-	 */
-	function getReferenceCount($value, $includeCurrent = true){
+	function getReferenceCount(object $value, bool $includeCurrent = true): int{
 		ob_start();
 		debug_zval_dump($value);
 		$ret = explode("\n", ob_get_contents());
@@ -369,7 +347,7 @@ namespace pocketmine {
 	 *
 	 * @return array
 	 */
-	function getTrace($start = 1, $trace = null){
+	function getTrace(int $start = 1, $trace = null): array{
 		if($trace === null){
 			if(function_exists("xdebug_get_function_stack")){
 				$trace = array_reverse(xdebug_get_function_stack());
@@ -399,12 +377,7 @@ namespace pocketmine {
 		return $messages;
 	}
 
-	/**
-	 * @param $path
-	 *
-	 * @return string
-	 */
-	function cleanPath($path){
+	function cleanPath($path): string{
 		return rtrim(str_replace(["\\", ".php", "phar://", rtrim(str_replace(["\\", "phar://"], ["/", ""], \pocketmine\PATH), "/"), rtrim(str_replace(["\\", "phar://"], ["/", ""], \pocketmine\PLUGIN_PATH), "/")], ["/", "", "", "", ""], $path), "/");
 	}
 

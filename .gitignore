@@ -38,6 +38,7 @@ Desktop.ini
 bin-7.0/*
 bin-7.3/*
 bin-8.0/*
+bin-8.1/*
 bin-8.2/*
 
 # Composer
@@ -49,3 +50,6 @@ vendor/*
 *.gz
 *.rar
 *.xz
+
+# Test
+run.sh
