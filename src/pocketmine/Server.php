@@ -645,7 +645,8 @@ class Server{
 		return (bool) $this->getProperty("player.save-player-data", true);
 	}
 
-	public function getOfflinePlayer(string $name): OfflinePlayer | Player{
+	/** @return OfflinePlayer | Player */
+	public function getOfflinePlayer(string $name){
 		$name = strtolower($name);
 		$result = $this->getPlayerExact($name);
 

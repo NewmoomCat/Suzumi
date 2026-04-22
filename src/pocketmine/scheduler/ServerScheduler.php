@@ -60,15 +60,6 @@ class ServerScheduler {
 	}
 
 	/**
-	 * @param Task $task
-	 *
-	 * @return null|TaskHandler
-	 */
-	public function scheduleTask(Task $task){
-		return $this->addTask($task, -1, -1);
-	}
-
-	/**
 	 * Submits an asynchronous task to the Worker Pool
 	 *
 	 * @param AsyncTask $task
@@ -103,23 +94,6 @@ class ServerScheduler {
 	}
 
 	/**
-	 * @param $newSize
-	 */
-	public function increaseAsyncTaskPoolSize($newSize){
-		$this->asyncPool->increaseSize($newSize);
-	}
-
-	/**
-	 * @param Task $task
-	 * @param int  $delay
-	 *
-	 * @return null|TaskHandler
-	 */
-	public function scheduleDelayedTask(Task $task, $delay){
-		return $this->addTask($task, (int) $delay, -1);
-	}
-
-	/**
 	 * @param Task $task
 	 * @param int  $period
 	 *
@@ -127,27 +101,6 @@ class ServerScheduler {
 	 */
 	public function scheduleRepeatingTask(Task $task, $period){
 		return $this->addTask($task, -1, (int) $period);
-	}
-
-	/**
-	 * @param Task $task
-	 * @param int  $delay
-	 * @param int  $period
-	 *
-	 * @return null|TaskHandler
-	 */
-	public function scheduleDelayedRepeatingTask(Task $task, $delay, $period){
-		return $this->addTask($task, (int) $delay, (int) $period);
-	}
-
-	/**
-	 * @param int $taskId
-	 */
-	public function cancelTask($taskId){
-		if($taskId !== null and isset($this->tasks[$taskId])){
-			$this->tasks[$taskId]->cancel();
-			unset($this->tasks[$taskId]);
-		}
 	}
 
 	/**
@@ -173,15 +126,6 @@ class ServerScheduler {
 			$this->queue->extract();
 		}
 		$this->ids = 1;
-	}
-
-	/**
-	 * @param int $taskId
-	 *
-	 * @return bool
-	 */
-	public function isQueued($taskId){
-		return isset($this->tasks[$taskId]);
 	}
 
 	/**
