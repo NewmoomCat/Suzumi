@@ -30,7 +30,6 @@
 
 namespace pocketmine {
 
-	use http\Params;
 	use pocketmine\utils\Binary;
 	use pocketmine\utils\MainLogger;
 	use pocketmine\utils\ServerKiller;
@@ -48,7 +47,7 @@ namespace pocketmine {
 	const POCKETMINE = "Trinity";
 	const VERSION = "1.1dev";
 	const API_VERSION = "3.0.1";
-	const CODENAME = "매지컬(Magical) 레이사(Reisa)";
+	const CODENAME = "매지컬(Magical) 스즈미(Suzumi)"; // 代号“铃美”测试
 	const GENISYS_API_VERSION = '2.0.0';
 
 	/**
@@ -70,8 +69,8 @@ namespace pocketmine {
 		@define('pocketmine\PATH', \getcwd() . DIRECTORY_SEPARATOR);
 	}
 
-	if(version_compare("7.2", PHP_VERSION) >= 0){
-		echo "[CRITICAL] You must use PHP >= 7.2" . PHP_EOL;
+	if(version_compare("8.0", PHP_VERSION) >= 0){
+		echo "[CRITICAL] You must use PHP >= 8.0" . PHP_EOL;
 		echo "[CRITICAL] Please use the installer provided on the homepage." . PHP_EOL;
 		exit(1);
 	}
