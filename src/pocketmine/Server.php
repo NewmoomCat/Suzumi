@@ -685,11 +685,6 @@ class Server{
 				new DoubleTag(2, $spawn->z)
 			]),
 			new StringTag("Level", $this->getDefaultLevel()->getName()),
-			//new StringTag("SpawnLevel", $this->getDefaultLevel()->getName()),
-			//new IntTag("SpawnX", (int) $spawn->x),
-			//new IntTag("SpawnY", (int) $spawn->y),
-			//new IntTag("SpawnZ", (int) $spawn->z),
-			//new ByteTag("SpawnForced", 1), //TODO
 			new ListTag("Inventory", []),
 			new ListTag("EnderChestInventory", []),
 			new CompoundTag("Achievements", []),
@@ -1003,18 +998,9 @@ class Server{
 		}
 		$path = $this->getDataPath() . "worlds/" . $name . "/";
 		if(!($this->getLevelByName($name) instanceof Level)){
-
 			if(LevelProviderManager::getProvider($path) === null){
 				return false;
 			}
-			/*if(file_exists($path)){
-				$level = new LevelImport($path);
-				if($level->import() === false){ //Try importing a world
-					return false;
-				}
-			}else{
-				return false;
-			}*/
 		}
 
 		return true;
@@ -2070,11 +2056,6 @@ class Server{
 	 * @param string $msg
 	 */
 	public function shutdown(bool $restart = false, string $msg = ""){
-		/*if($this->isRunning){
-			$killer = new ServerKiller(90);
-			$killer->start();
-			$killer->kill();
-		}*/
 		$this->isRunning = false;
 		if($msg != ""){
 			$this->propertyCache["settings.shutdown-message"] = $msg;
